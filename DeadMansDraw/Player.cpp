@@ -44,9 +44,11 @@ void Player::displayPlayArea() const {
     }
 }
 
+/*
+    The general process is iterating through each card type through the CardType enum and then picking matching cards and then placing and sorting them before printing them in order
+    time complexity be damned...
+*/
 void Player::displayBank() const {
-
-    
 
     for (int suit = static_cast<int>(Card::CardType::Cannon); suit <= static_cast<int>(Card::CardType::Anchor); suit++) { // Converts the enum list into integers to iterate through
         
@@ -62,8 +64,12 @@ void Player::displayBank() const {
 
         if (!selectedSuit.empty()) {
             std::sort(selectedSuit.begin(), selectedSuit.end(), [](const std::unique_ptr<Card>& cardA, const std::unique_ptr<Card>& cardB) {
-                return cardA->getValue() > cardB->getValue();
-            });
+                return cardA->getValue() > cardB->getValue(); // Handy little lambda function
+                });
+
+            for (const std::unique_ptr<Card>& card : selectedSuit) {
+                std::cout << card->str() << std::endl;
+            }
         }
 
     }

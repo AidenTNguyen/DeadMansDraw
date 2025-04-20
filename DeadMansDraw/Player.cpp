@@ -76,6 +76,10 @@ void Player::displayBank() const {
     }
 }
 
+/*
+    Uses a map to identify the highest value card from each suit present in the bank
+    Both sets the player's score and returns the total score
+*/
 int Player::calculateTotalScore() {
     std::map<Card::CardType, int> highestScores;
 
@@ -93,6 +97,13 @@ int Player::calculateTotalScore() {
 
     }
 
+    int totalScore = 0;
 
+    for (const auto& pair : highestScores) {
+        totalScore += pair.second;
+    }
+
+    score = totalScore;
+    return totalScore;
 
 }

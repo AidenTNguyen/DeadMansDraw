@@ -77,5 +77,22 @@ void Player::displayBank() const {
 }
 
 int Player::calculateTotalScore() {
-    std::map<Card, int> highestScores;
+    std::map<Card::CardType, int> highestScores;
+
+    for (const std::unique_ptr<Card>& card : bank) {
+        
+        Card::CardType suit = card->Type();
+        int cardValue = card->getValue();
+
+        if (highestScores.find(suit) == highestScores.end()) { // Checking if the suit exists in the map yet
+            highestScores[suit] = cardValue;
+        }
+        else {
+            highestScores[suit] = std::max(highestScores[suit], cardValue);
+        }
+
+    }
+
+
+
 }

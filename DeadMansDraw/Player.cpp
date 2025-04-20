@@ -45,7 +45,20 @@ void Player::displayPlayArea() const {
 }
 
 void Player::displayBank() const {
-    for (int suit = static_cast<int>(Card::CardType::Cannon); i <= static_cast<int>(Card::CardType::Anchor); suit++) { // Converts the enum list into integers to iterate through
+
+    
+
+    for (int suit = static_cast<int>(Card::CardType::Cannon); suit <= static_cast<int>(Card::CardType::Anchor); suit++) { // Converts the enum list into integers to iterate through
+        
+        CardCollection selectedSuit;
+
+        for (const std::unique_ptr<Card>& card : bank) {
+
+            if (static_cast<int>(card->Type()) == suit) {
+                selectedSuit.push_back(std::make_unique<Card>(*card)); // Dereference to get the card object
+            }
+
+        }
 
     }
 }

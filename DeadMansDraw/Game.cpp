@@ -67,7 +67,11 @@ void Game::discardHand(Player& player) {
 
 }
 
-CardCollection createDeck() {
+std::unique_ptr<Card> Game::createCard(const Card::CardType type, const int value) const {
+    return std::make_unique<Card>(type, value);
+}
+
+CardCollection Game::createDeck() {
 
     // First loop for digits 2 through 7
     for (int value = 2; value <= 7; ++value) {

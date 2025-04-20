@@ -122,16 +122,17 @@ std::string Player::getName() const {
 */
 bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
 
-    playArea.push_back(card); // Play the card into the play area no matter what
+    playArea.push_back(std::move(card)); // Play the card into the play area no matter what
+    std::unique_ptr<Card>& movedCard = playArea.back();
 
-    if (isBust(card)) { // Does the card immediately cause a bust?
+    if (isBust(movedCard)) { // Does the card immediately cause a bust?
         return true;
     }
 
     // Else play the card
-    card->play(game, *this);
+    movedCard->play(game, *this);
 
-    if (isBust(card)) { // Does playing the card cause a bust?
+    if (isBust(movedCard)) { // Does playing the card cause a bust?
         return true;
     }
 

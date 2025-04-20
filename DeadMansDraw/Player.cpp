@@ -107,3 +107,7 @@ int Player::calculateTotalScore() {
     return totalScore;
 
 }
+
+int Player::getScore() const {
+    return score;
+}

@@ -1,14 +1,14 @@
 #pragma once
 
 /*
-    Sword card type
+    Hook card type
 */
 
 #include "Card.h"
 
-class Sword : public Card {
+class Hook : public Card {
 public:
-    Sword(int value);
+    Hook(int value);
     CardType type() const;
     std::string str() const;
     void play(Game& game, Player& player);

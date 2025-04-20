@@ -1,5 +1,7 @@
 #include "Game.h"
 #include <iostream>
+#include <random>
+#include "Card.h"
 
 using namespace std;
 
@@ -68,7 +70,9 @@ void Game::discardHand(Player& player) {
 }
 
 std::unique_ptr<Card> Game::createCard(const Card::CardType type, const int value) const {
-    return std::make_unique<Card>(type, value);
+
+
+    /*return std::make_unique<Card>(type, value);*/
 }
 
 void Game::createDeck() {
@@ -83,4 +87,10 @@ void Game::createDeck() {
 
         }
     }
+}
+
+void Game::shuffleDeck(CardCollection& cards) {
+    CardCollection shuffleDeck{ cards.begin(), cards.end() };
+    std::shuffle(shuffleDeck.begin(), shuffleDeck.end(), std::mt19937{ std::random_device{}() });
+    std::copy(shuffleDeck.begin(), shuffleDeck.end(), cards.begin());
 }

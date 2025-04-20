@@ -35,7 +35,7 @@ private:
 
     void createDeck();
     std::unique_ptr<Card> createCard(const Card::CardType type, const int value) const;
-    void shuffleDeck();
+    void shuffleDeck(CardCollection& cards);
     void initialisePlayers();
 
 };

@@ -20,6 +20,7 @@ public:
     ~Game() = default;
 
     void startGame();
+    std::vector<std::unique_ptr<Player>> getPlayerList() const;
     std::string endGame();
     std::unique_ptr<Card> drawCard();
     void endTurn();
@@ -30,7 +31,7 @@ private:
     int turnCount;
     CardCollection sharedDeck;
     CardCollection discardPile;
-    std::vector<std::unique_ptr<Player>> playerList; // Dont think this merits a typedef considering its used only once... i think... we'll see. Hope i dont forget to remove this
+    std::vector<std::unique_ptr<Player>> playerList;
     std::unique_ptr<Player> activePlayer;
 
     CardCollection createDeck();

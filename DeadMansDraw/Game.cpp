@@ -10,3 +10,11 @@ void Game::startGame() {
 
     //} while (playAgain);
 }
+
+std::string endGame() {
+    std::cout << "--- Game Over---" << std::endl;
+
+    for (const std::unique_ptr<Player>& player : playerList) {
+
+    }
+}

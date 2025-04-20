@@ -1,3 +1,4 @@
+#include "CardFactory.h"
 #include "Cannon.h"
 #include "Chest.h"
 #include "Key.h"

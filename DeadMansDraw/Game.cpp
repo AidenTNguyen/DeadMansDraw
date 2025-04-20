@@ -72,6 +72,10 @@ CardCollection createDeck() {
     // First loop for digits 2 through 7
     for (int value = 2; value <= 7; ++value) {
 
+        // Iterate through each card type
+        for (int type = static_cast<int>(Card::CardType::Cannon); type <= static_cast<int>(Card::CardType::Anchor); ++type) {
+
+        }
     }
 
 }

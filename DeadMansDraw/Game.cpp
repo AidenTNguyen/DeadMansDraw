@@ -57,3 +57,12 @@ void Game::endTurn() {
     }
 
 }
+
+void Game::discardHand(Player& player) {
+
+    while (!player.getPlayArea().empty()) {
+        discardPile.push_back(std::move(player.getPlayArea().back())); // Move ptrs to discard pile
+        player.getPlayArea().pop_back(); // Clean up the remnant unique ptrs in the play area
+    }
+
+}

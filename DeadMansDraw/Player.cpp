@@ -24,5 +24,8 @@ bool Player::isBust(std::unique_ptr<Card>& card) const {
     Moves the cards from the play area to the player's bank
 */
 void Player::bankCards() {
-
+    for (std::unique_ptr<Card>& card : playArea) {
+        bank.push_back(std::move(card)); // Transferring ownership from Game -> Player
+    }
+    playArea.clear(); // say bye bye to nullptrs :D
 }

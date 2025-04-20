@@ -11,10 +11,15 @@ void Game::startGame() {
     //} while (playAgain);
 }
 
-std::string endGame() {
+std::string Game::endGame() {
+
     std::cout << "--- Game Over---" << std::endl;
 
-    for (const std::unique_ptr<Player>& player : playerList) {
+    std::unique_ptr<Player> victor = nullptr;
 
+    for (const std::unique_ptr<Player>& player : playerList) {
+        if (victor == nullptr) {
+            victor = std::make_unique<Player>(*player); // This copies instead of moves. The performance impact is HUGE! ENORMOUS!
+        }
     }
 }

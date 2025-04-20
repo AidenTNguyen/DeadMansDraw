@@ -20,7 +20,6 @@ public:
     ~Game() = default;
 
     void startGame();
-    std::vector<std::unique_ptr<Player>> getPlayerList() const;
     std::string endGame();
     std::unique_ptr<Card> drawCard();
     void endTurn();

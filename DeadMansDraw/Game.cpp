@@ -47,6 +47,8 @@ std::unique_ptr<Card> Game::drawCard() {
 
 void Game::endTurn() {
 
+    std::cout << "Bust! " << playerList[activePlayerIndex]->getName() << " loses all cards in play area." << std::endl;
+
     if (activePlayerIndex == playerList.size() - 1) {
         activePlayerIndex = 0;
     }

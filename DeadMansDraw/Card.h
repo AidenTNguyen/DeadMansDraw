@@ -46,4 +46,4 @@ protected:
 
 };
 
-typedef std::vector<Card*> CardCollection; // All classes are going to include "Card.h" so this seems like a good spot to put it
+typedef std::vector<std::unique_ptr<Card>> CardCollection; // All classes are going to include "Card.h" so this seems like a good spot to put it

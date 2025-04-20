@@ -24,7 +24,8 @@ public:
         Oracle,
         Map,
         Mermaid,
-        Kraken
+        Kraken,
+        Anchor
     };
 
     virtual void play(Game& game, Player& player) = 0;
@@ -35,9 +36,12 @@ public:
 
     virtual ~Card() = default;
 
+protected:
+    Card(CardType type) : cardType(type) {}
+
 private:
 
     int value = 0;
-    // CardType(suit) will be immediately assigned on concrete card construction
+    CardType cardType;
 
 };

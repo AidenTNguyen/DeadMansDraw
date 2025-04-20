@@ -30,3 +30,7 @@ std::string Game::endGame() {
 
     }
 }
+
+std::unique_ptr<Card> Game::drawCard() {
+
+}

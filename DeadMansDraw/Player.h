@@ -23,8 +23,8 @@ public:
     void bankCards();
     CardCollection& getPlayArea();
     CardCollection& getBank();
-    std::string displayPlayArea() const;
-    std::string displayBank() const;
+    void displayPlayArea() const;
+    void displayBank() const;
     int calculateTotalScore();
     int getScore() const;
     std::string getName() const;

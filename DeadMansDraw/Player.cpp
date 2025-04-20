@@ -37,3 +37,9 @@ CardCollection& Player::getPlayArea() {
 CardCollection& Player::getBank() {
     return bank;
 }
+
+void Player::displayPlayArea() const {
+    for (const std::unique_ptr<Card>& card : playArea) {
+        std::cout << card->str() << std::endl;
+    }
+}

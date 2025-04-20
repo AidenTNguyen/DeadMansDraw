@@ -17,5 +17,4 @@ public:
 
 private:
     int value;
-    bool keyPresent;
 };

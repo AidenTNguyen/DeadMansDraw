@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <map>
 
 Player::Player() : score(0)
 {
@@ -73,4 +74,8 @@ void Player::displayBank() const {
         }
 
     }
+}
+
+int Player::calculateTotalScore() {
+    std::map<Card, int> highestScores;
 }

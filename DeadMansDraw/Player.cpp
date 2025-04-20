@@ -45,7 +45,7 @@ void Player::displayPlayArea() const {
 }
 
 void Player::displayBank() const {
-    for (const std::unique_ptr<Card>& card : playArea) {
-        std::cout << card->str() << std::endl;
+    for (int suit = static_cast<int>(Card::CardType::Cannon); i <= static_cast<int>(Card::CardType::Anchor); suit++) { // Converts the enum list into integers to iterate through
+
     }
 }

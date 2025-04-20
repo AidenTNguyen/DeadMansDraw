@@ -29,3 +29,11 @@ void Player::bankCards() {
     }
     playArea.clear(); // say bye bye to nullptrs :D
 }
+
+CardCollection& Player::getPlayArea() {
+    return playArea;
+}
+
+CardCollection& Player::getBank() {
+    return bank;
+}

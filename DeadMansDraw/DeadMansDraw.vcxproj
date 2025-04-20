@@ -130,6 +130,7 @@
     <ClCompile Include="Anchor.cpp" />
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="Chest.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hook.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="Kraken.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="Map.h" />
     <ClCompile Include="Mermaid.cpp" />
     <ClCompile Include="Oracle.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sword.cpp" />
   </ItemGroup>
   <ItemGroup>

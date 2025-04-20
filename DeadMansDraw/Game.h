@@ -31,7 +31,7 @@ private:
     CardCollection sharedDeck;
     CardCollection discardPile;
     std::vector<std::unique_ptr<Player>> playerList;
-    std::unique_ptr<Player> activePlayer;
+    int activePlayerIndex;
 
     CardCollection createDeck();
     std::unique_ptr<Card> createCard(const Card::CardType type, const int value) const;

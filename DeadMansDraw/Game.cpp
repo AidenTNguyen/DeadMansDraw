@@ -47,12 +47,11 @@ std::unique_ptr<Card> Game::drawCard() {
 
 void Game::endTurn() {
 
-    int activePlayerIndex = -1;
-
-    for (int index = 0; index < playerList.size(); index++) {
-        if (playerList[index].get() == activePlayer.get()) {
-            activePlayerIndex = index;
-            break;
-        }
+    if (activePlayerIndex == playerList.size() - 1) {
+        activePlayerIndex = 0;
     }
+    else {
+        activePlayerIndex += 1;
+    }
+
 }

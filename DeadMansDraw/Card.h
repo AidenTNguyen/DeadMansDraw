@@ -38,9 +38,6 @@ public:
 
 protected:
     Card(CardType type) : cardType(type) {}
-
-private:
-
     int value = 0;
     CardType cardType;
 

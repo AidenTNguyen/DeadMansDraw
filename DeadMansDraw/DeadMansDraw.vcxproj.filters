@@ -24,6 +24,9 @@
     <ClCompile Include="Kraken.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Cannon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameTitle.h">

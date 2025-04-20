@@ -111,3 +111,7 @@ int Player::calculateTotalScore() {
 int Player::getScore() const {
     return score;
 }
+
+std::string Player::getName() const {
+    return name;
+}

@@ -116,10 +116,22 @@ std::string Player::getName() const {
     return name;
 }
 
+/*
+    First plays the card into the play area and then checks if doing so causes a bust
+    if not it plays the card and checks again if it causes a bust
+*/
 bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
+
     playArea.push_back(card); // Play the card into the play area no matter what
 
-    if (isBust(card)) {
+    if (isBust(card)) { // Does the card immediately cause a bust?
+        return true;
+    }
+
+    // Else play the card
+    card->play(game, *this);
+
+    if (isBust(card)) { // Does playing the card cause a bust?
         return true;
     }
 

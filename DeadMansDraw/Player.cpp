@@ -60,5 +60,11 @@ void Player::displayBank() const {
 
         }
 
+        if (!selectedSuit.empty()) {
+            std::sort(selectedSuit.begin(), selectedSuit.end(), [](const std::unique_ptr<Card>& cardA, const std::unique_ptr<Card>& cardB) {
+                return cardA->getValue() > cardB->getValue();
+            });
+        }
+
     }
 }

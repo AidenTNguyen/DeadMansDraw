@@ -6,6 +6,7 @@
 
 #include <string>
 #include "Card.h"
+#include "Player.h"
 
 class Player;
 

@@ -10,6 +10,8 @@
 
 class Game;
 
+using CardCollection = std::vector<Card*>;
+
 class Player {
     
 protected:
@@ -19,5 +21,6 @@ protected:
 
 private:
 
-    Card playArea;
+    CardCollection playArea;
+    CardCollection bank;
 };

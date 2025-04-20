@@ -11,7 +11,7 @@ Player::Player() : score(0)
 */
 bool Player::isBust(std::unique_ptr<Card>& card) const {
     for (const std::unique_ptr<Card>& playAreaCard : playArea) {
-        if (card.Type() == playAreaCard.Type()) {
+        if (card->Type() == playAreaCard->Type()) {
             return true;
         }
         

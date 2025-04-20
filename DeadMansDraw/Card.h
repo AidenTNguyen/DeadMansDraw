@@ -8,11 +8,14 @@
 #include <memory>
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 class Game;
 class Player;
 
 class Card {
+
+
 public:
 
     enum class CardType {
@@ -42,3 +45,5 @@ protected:
     CardType cardType;
 
 };
+
+typedef std::vector<Card*> CardCollection; // All classes are going to include "Card.h" so this seems like a good spot to put it

@@ -397,3 +397,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+DeadMansDraw/DeadMansDraw.vcxproj.filters
+DeadMansDraw/DeadMansDraw.vcxproj

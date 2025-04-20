@@ -127,13 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Kraken.h" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Anchor.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="gameTitle.h" />
+    <ClInclude Include="Hook.h" />
+    <ClInclude Include="Key.h" />
+    <ClInclude Include="Mermaid.h" />
+    <ClInclude Include="Oracle.h" />
+    <ClInclude Include="Sword.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

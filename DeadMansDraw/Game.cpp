@@ -18,8 +18,15 @@ std::string Game::endGame() {
     std::unique_ptr<Player> victor = nullptr;
 
     for (const std::unique_ptr<Player>& player : playerList) {
-        if (victor == nullptr) {
+
+        if (victor == nullptr || player->getScore() > victor->getScore()) {
             victor = std::make_unique<Player>(*player); // This copies instead of moves. The performance impact is HUGE! ENORMOUS!
         }
+
+        player->displayBank();
+        std::cout << "| Score: " << player->getScore() << std::endl;
+
+        std::cout << player->getName() << " Wins!";
+
     }
 }

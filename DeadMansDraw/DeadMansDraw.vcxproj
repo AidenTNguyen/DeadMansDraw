@@ -130,6 +130,7 @@
     <ClCompile Include="DeadMansDraw.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Card.h" />
     <ClInclude Include="gameTitle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

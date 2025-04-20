@@ -19,3 +19,10 @@ bool Player::isBust(std::unique_ptr<Card>& card) const {
         
     }
 }
+
+/*
+    Moves the cards from the play area to the player's bank
+*/
+void Player::bankCards() {
+
+}

@@ -115,3 +115,14 @@ int Player::getScore() const {
 std::string Player::getName() const {
     return name;
 }
+
+bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
+    playArea.push_back(card); // Play the card into the play area no matter what
+
+    if (isBust(card)) {
+        return true;
+    }
+
+    return false;
+
+}

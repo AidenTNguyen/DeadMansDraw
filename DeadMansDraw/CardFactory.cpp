@@ -33,4 +33,5 @@ std::unique_ptr<Card> instantiateCard(Card::CardType type, int value) {
         return std::make_unique<Kraken>(value);
     case Card::CardType::Anchor:
         return std::make_unique<Anchor>(value);
+    }
 }

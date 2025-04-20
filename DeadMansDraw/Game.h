@@ -20,7 +20,7 @@ public:
     ~Game() = default;
 
     void startGame();
-    std::string endGame();
+    void endGame();
     std::unique_ptr<Card> drawCard();
     void endTurn();
     void discardHand(Player& player);

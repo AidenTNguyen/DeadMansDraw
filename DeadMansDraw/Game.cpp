@@ -13,10 +13,9 @@ void Game::startGame() {
     //} while (playAgain);
 }
 
-std::string Game::endGame() {
+void Game::endGame() {
 
     std::cout << "--- Game Over---" << std::endl;
-
     std::unique_ptr<Player> victor = nullptr;
 
     for (const std::unique_ptr<Player>& player : playerList) {
@@ -70,30 +69,9 @@ void Game::discardHand(Player& player) {
 }
 
 std::unique_ptr<Card> Game::createCard(const Card::CardType type, const int value) const {
+    
+    return instantiateCard(type, value);
 
-    switch (type) {
-    case Card::CardType::Cannon:
-        return std::make_unique<Cannon>(value);
-    case Card::CardType::Chest:
-        return std::make_unique<ChestCard>(value);
-    case Card::CardType::Key:
-        return std::make_unique<KeyCard>(value);
-    case Card::CardType::Sword:
-        return std::make_unique<SwordCard>(value);
-    case Card::CardType::Hook:
-        return std::make_unique<HookCard>(value);
-    case Card::CardType::Oracle:
-        return std::make_unique<OracleCard>(value);
-    case Card::CardType::Map:
-        return std::make_unique<MapCard>(value);
-    case Card::CardType::Mermaid:
-        return std::make_unique<MermaidCard>(value);
-    case Card::CardType::Kraken:
-        return std::make_unique<KrakenCard>(value);
-    case Card::CardType::Anchor:
-        return std::make_unique<Anchor>(value);
-
-    /*return std::make_unique<Card>(type, value);*/
 }
 
 void Game::createDeck() {

@@ -35,7 +35,7 @@ public:
     virtual void willAddToBank(Game& game, const Player& player) = 0;
     virtual int getValue() const = 0;
     virtual std::string str() const = 0;
-    virtual CardType Type() const = 0;
+    virtual CardType type() const = 0;
 
     virtual ~Card() = default;
 

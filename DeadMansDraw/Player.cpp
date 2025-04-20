@@ -12,7 +12,7 @@ Player::Player() : score(0)
 */
 bool Player::isBust(std::unique_ptr<Card>& card) const {
     for (const std::unique_ptr<Card>& playAreaCard : playArea) {
-        if (card->Type() == playAreaCard->Type()) {
+        if (card->type() == playAreaCard->type()) {
             return true;
         }
         
@@ -57,7 +57,7 @@ void Player::displayBank() const {
 
         for (const std::unique_ptr<Card>& card : bank) {
 
-            if (static_cast<int>(card->Type()) == suit) {
+            if (static_cast<int>(card->type()) == suit) {
                 selectedSuit.push_back(std::make_unique<Card>(*card)); // Dereference to get the card object
             }
 
@@ -85,7 +85,7 @@ int Player::calculateTotalScore() {
 
     for (const std::unique_ptr<Card>& card : bank) {
         
-        Card::CardType suit = card->Type();
+        Card::CardType suit = card->type();
         int cardValue = card->getValue();
 
         if (highestScores.find(suit) == highestScores.end()) { // Checking if the suit exists in the map yet

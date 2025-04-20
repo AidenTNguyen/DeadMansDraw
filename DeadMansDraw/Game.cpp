@@ -71,7 +71,7 @@ std::unique_ptr<Card> Game::createCard(const Card::CardType type, const int valu
     return std::make_unique<Card>(type, value);
 }
 
-CardCollection Game::createDeck() {
+void Game::createDeck() {
 
     // First loop for digits 2 through 7
     for (int value = 2; value <= 7; ++value) {
@@ -79,7 +79,8 @@ CardCollection Game::createDeck() {
         // Iterate through each card type
         for (int type = static_cast<int>(Card::CardType::Cannon); type <= static_cast<int>(Card::CardType::Anchor); ++type) {
 
+            sharedDeck.push_back(createCard(static_cast<Card::CardType>(type), value)); // Use the integer as an index of sorts fo the CardType enum list in Card.h
+
         }
     }
-
 }

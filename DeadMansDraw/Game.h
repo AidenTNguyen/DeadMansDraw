@@ -33,7 +33,7 @@ private:
     std::vector<std::unique_ptr<Player>> playerList;
     int activePlayerIndex;
 
-    CardCollection createDeck();
+    void createDeck();
     std::unique_ptr<Card> createCard(const Card::CardType type, const int value) const;
     void shuffleDeck();
     void initialisePlayers();

@@ -33,4 +33,14 @@ std::string Game::endGame() {
 
 std::unique_ptr<Card> Game::drawCard() {
 
+    if (sharedDeck.empty()) {
+        return nullptr; // to be handled elsewhere, not my problem!
+    }
+
+    // Move the top card to a unique ptr
+    std::unique_ptr<Card> drawnCard = std::move(sharedDeck.front());
+
+    sharedDeck.erase(sharedDeck.begin());
+
+    return drawnCard;
 }

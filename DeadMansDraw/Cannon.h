@@ -9,6 +9,11 @@
 class Cannon : public Card {
 public:
     Cannon(int value);
+    CardType type() const;
+    std::string str() const;
+    void play(Game& game, Player& player);
+    void willAddToBank(const Player& player);
+    int getValue() const;
 
 private:
     int value;

@@ -43,3 +43,9 @@ void Player::displayPlayArea() const {
         std::cout << card->str() << std::endl;
     }
 }
+
+void Player::displayBank() const {
+    for (const std::unique_ptr<Card>& card : playArea) {
+        std::cout << card->str() << std::endl;
+    }
+}

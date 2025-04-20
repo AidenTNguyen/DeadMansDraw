@@ -1,8 +1,7 @@
 #pragma once
 
 /*
-    Mainly responsible for player's own play area and bank
-    will hold both name and score
+    Responsible for overseeing the shared and discard decks, turns and initialising the cards, decks and players
 */
 
 #include <string>
@@ -14,6 +13,17 @@ using CardCollection = std::vector<std::unique_ptr<Card>>;
 
 class Game {
 
+public:
+
+    Game();
+    ~Game() = default;
+
+    void startGame();
+    std::string endGame();
+    std::unique_ptr<Card> drawCard();
+    void endTurn();
+    void discardHand(Player& player);
+
 private:
 
     int turnCount;
@@ -21,5 +31,10 @@ private:
     CardCollection discardPile;
     std::vector<std::unique_ptr<Player>> playerList; // Dont think this merits a typedef considering its used only once... i think... we'll see. Hope i dont forget to remove this
     std::unique_ptr<Player> activePlayer;
+
+    CardCollection createDeck();
+    std::unique_ptr<Card> createCard(const Card::CardType type, const int value) const;
+    void shuffleDeck();
+    void initialisePlayers();
 
 };

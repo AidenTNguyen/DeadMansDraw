@@ -19,6 +19,8 @@ bool Player::isBust(std::unique_ptr<Card>& card) const {
         return false;
         
     }
+
+    return false;
 }
 
 /*
@@ -53,12 +55,12 @@ void Player::displayBank() const {
 
     for (int suit = static_cast<int>(Card::CardType::Cannon); suit <= static_cast<int>(Card::CardType::Anchor); suit++) { // Converts the enum list into integers to iterate through
         
-        CardCollection selectedSuit;
+        std::vector<const Card*> selectedSuit;
 
         for (const std::unique_ptr<Card>& card : bank) {
 
             if (static_cast<int>(card->type()) == suit) {
-                selectedSuit.push_back(std::make_unique<Card>(*card)); // Dereference to get the card object
+                selectedSuit.push_back(card.get());
             }
 
         }
@@ -68,7 +70,7 @@ void Player::displayBank() const {
                 return cardA->getValue() > cardB->getValue(); // Handy little lambda function
                 });
 
-            for (const std::unique_ptr<Card>& card : selectedSuit) {
+            for (const Card* card : selectedSuit) {
                 std::cout << card->str() << std::endl;
             }
         }

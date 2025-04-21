@@ -10,7 +10,7 @@ Player::Player() : score(0)
 /*
 *  Determines if the given card matches suit with any cards in the current play area
 */
-bool Player::isBust(std::unique_ptr<Card>& card, const Card* excludeCard = nullptr) const {
+bool Player::isBust(std::unique_ptr<Card>& card, const Card* excludeCard) const {
 
     if (playArea.empty()) {
         return false;
@@ -46,8 +46,11 @@ CardCollection& Player::getBank() {
 }
 
 void Player::displayPlayArea() const {
+
+    std::cout << name << "'s Play Area:" << std::endl;
+
     for (const std::unique_ptr<Card>& card : playArea) {
-        std::cout << card->str() << std::endl << std::endl;
+        std::cout << card->str() << std::endl;
     }
 }
 

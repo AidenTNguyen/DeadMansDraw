@@ -49,11 +49,12 @@ void Game::startGame() {
             activePlayer->displayPlayArea();
 
             std::string reply;
+            std::cout << std::endl;
             std::cout << "Draw again ? (y/n): ";
             std::getline(std::cin, reply);
 
             if (reply == "y") {
-                currentTurn++;
+                currentTurn ++;
                 playAgain = true;
             }
             else {

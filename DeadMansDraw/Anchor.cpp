@@ -21,7 +21,7 @@ std::string Anchor::str() const {
 }
 
 void Anchor::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Anchor::willAddToBank(Game& game, const Player& player) {

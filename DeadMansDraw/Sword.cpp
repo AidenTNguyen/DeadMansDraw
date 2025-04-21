@@ -21,7 +21,7 @@ std::string Sword::str() const {
 }
 
 void Sword::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Sword::willAddToBank(Game& game, const Player& player) {

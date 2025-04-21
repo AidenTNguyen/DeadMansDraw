@@ -21,7 +21,7 @@ std::string Map::str() const {
 }
 
 void Map::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Map::willAddToBank(Game& game, const Player& player) {

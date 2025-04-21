@@ -21,7 +21,7 @@ std::string Oracle::str() const {
 }
 
 void Oracle::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Oracle::willAddToBank(Game& game, const Player& player) {

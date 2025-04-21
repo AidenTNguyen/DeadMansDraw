@@ -20,7 +20,7 @@ std::string Cannon::str() const {
 }
 
 void Cannon::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Cannon::willAddToBank(Game& game, const Player& player) {

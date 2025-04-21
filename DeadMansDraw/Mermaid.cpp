@@ -21,7 +21,7 @@ std::string Mermaid::str() const {
 }
 
 void Mermaid::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Mermaid::willAddToBank(Game& game, const Player& player) {

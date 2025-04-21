@@ -21,7 +21,7 @@ std::string Chest::str() const {
 }
 
 void Chest::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Chest::willAddToBank(Game& game, const Player& player) {

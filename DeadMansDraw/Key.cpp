@@ -21,7 +21,7 @@ std::string Key::str() const {
 }
 
 void Key::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Key::willAddToBank(Game& game, const Player& player) {

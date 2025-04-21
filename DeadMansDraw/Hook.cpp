@@ -21,7 +21,7 @@ std::string Hook::str() const {
 }
 
 void Hook::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Hook::willAddToBank(Game& game, const Player& player) {

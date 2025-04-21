@@ -21,11 +21,14 @@ public:
 
     void startGame();
     void endGame();
+    std::vector<std::unique_ptr<Player>>& getPlayerList();
     std::unique_ptr<Card> drawCard();
     void endTurn();
     void discardHand(std::unique_ptr<Player>& player);
     CardCollection& getSharedDeck();
     CardCollection& getDiscardPile();
+    
+
 
 private:
 

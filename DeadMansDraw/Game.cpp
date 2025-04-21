@@ -180,3 +180,7 @@ CardCollection& Game::getSharedDeck() {
 CardCollection& Game::getDiscardPile() {
     return discardPile;
 }
+
+std::vector<std::unique_ptr<Player>>& Game::getPlayerList() {
+    return playerList;
+}

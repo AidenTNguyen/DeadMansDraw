@@ -24,6 +24,8 @@ public:
     std::unique_ptr<Card> drawCard();
     void endTurn();
     void discardHand(std::unique_ptr<Player>& player);
+    CardCollection& getSharedDeck();
+    CardCollection& getDiscardPile();
 
 private:
 

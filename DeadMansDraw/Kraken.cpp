@@ -27,6 +27,9 @@ void Kraken::play(Game& game, Player& player) {
     int additionalDraws = 3;
 
     for (additionalDraws; additionalDraws != 0; additionalDraws--) {
+
+        if (game)
+
         auto drawnCard = game.drawCard();
     }
 }

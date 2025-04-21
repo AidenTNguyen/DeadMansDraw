@@ -172,3 +172,11 @@ void Game::initialisePlayers() {
     playerList.push_back(std::make_unique<Player>());
     playerList.push_back(std::make_unique<Player>());
 }
+
+CardCollection& Game::getSharedDeck() {
+    return sharedDeck;
+}
+
+CardCollection& Game::getDiscardPile() {
+    return discardPile;
+}

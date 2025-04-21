@@ -38,6 +38,7 @@ void Cannon::play(Game& game, Player& player) {
 
     if (opponent->getBank().empty()) {
         std::cout << " Opponent's bank is empty, Play continues." << std::endl;
+        return;
     }
 
     // Find highest value card of each suit in opponent's bank

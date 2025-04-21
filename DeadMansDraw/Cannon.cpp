@@ -1,6 +1,8 @@
 #include "Cannon.h"
 #include "Player.h"
 #include "Game.h"
+#include <map>
+
 using namespace std;
 
 Cannon::Cannon(int _value)
@@ -31,6 +33,29 @@ void Cannon::play(Game& game, Player& player) {
             break;
         }
     }
+    
+    CardCollection& opponentBank = opponent->getBank();
+
+    if (opponent->getBank().empty()) {
+        std::cout << " Opponent's bank is empty, Play continues." << std::endl;
+    }
+
+    // Find highest value card of each suit in opponent's bank
+    std::map<Card::CardType, std::pair<int, size_t>> highestCards; // Maps suit to {value, index}
+
+    for (size_t i = 0; i < opponentBank.size(); i++) {
+        if (!opponentBank[i]) continue; // Skip null pointers
+
+        Card::CardType suit = opponentBank[i]->type();
+        int cardValue = opponentBank[i]->getValue();
+
+        // new suit or higher value
+        if (highestCards.find(suit) == highestCards.end() ||
+            cardValue > highestCards[suit].first) {
+            highestCards[suit] = { cardValue, i };
+        }
+    }
+
 }
 
 void Cannon::willAddToBank(Game& game, const Player& player) {

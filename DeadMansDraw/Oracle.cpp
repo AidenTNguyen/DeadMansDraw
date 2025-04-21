@@ -1,5 +1,6 @@
 #include "Oracle.h"
 #include "Player.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ std::string Oracle::str() const {
 }
 
 void Oracle::play(Game& game, Player& player) {
-    std::cout << player.getName() << " draws a " << str() << std::endl;
+    std::cout << "  The Oracle sees a " << game.getSharedDeck().front()->str() << std::endl;
 }
 
 void Oracle::willAddToBank(Game& game, const Player& player) {

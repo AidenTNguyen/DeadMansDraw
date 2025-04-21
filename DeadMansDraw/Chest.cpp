@@ -21,7 +21,7 @@ std::string Chest::str() const {
 }
 
 void Chest::play(Game& game, Player& player) {
-    std::cout << player.getName() << " draws a " << str() << std::endl;
+    std::cout << "  No immediate effect. If banked with a key, draw as many bonus cards from the discard pile as you moved into your Bank." << std::endl;
 }
 
 void Chest::willAddToBank(Game& game, const Player& player) {

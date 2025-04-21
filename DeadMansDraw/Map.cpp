@@ -1,5 +1,6 @@
 #include "Map.h"
 #include "Player.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ std::string Map::str() const {
 }
 
 void Map::play(Game& game, Player& player) {
-    std::cout << player.getName() << " draws a " << str() << std::endl;
+    std::cout << "  Draw 3 cards from the discard pile and pick one to add to the play area" << std::endl;
 }
 
 void Map::willAddToBank(Game& game, const Player& player) {

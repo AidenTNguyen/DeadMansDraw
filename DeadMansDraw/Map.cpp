@@ -36,6 +36,16 @@ void Map::play(Game& game, Player& player) {
     // temporary storage for the drawn cards
     std::vector<std::unique_ptr<Card>> drawnCards;
 
+    // draw up to 3
+    for (int i = 0; i < availableCards; i++) {
+        drawnCards.push_back(std::move(discardPile.back()));
+        discardPile.pop_back();
+    }
+
+    for (int i = 0; i < drawnCards.size(); i++) {
+        std::cout << "  (" << (i + 1) << ") " << drawnCards[i]->str() << std::endl; // display, should display as many as possible and not short circuit and die
+    }
+
 }
 
 void Map::willAddToBank(Game& game, const Player& player) {

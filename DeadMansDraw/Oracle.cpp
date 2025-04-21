@@ -16,7 +16,7 @@ Card::CardType Oracle::type() const {
 }
 
 std::string Oracle::str() const {
-    return "";
+    return "Oracle(" + std::to_string(getValue()) + ")";
 }
 
 void Oracle::play(Game& game, Player& player) {

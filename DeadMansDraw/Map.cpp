@@ -16,7 +16,7 @@ Card::CardType Map::type() const {
 }
 
 std::string Map::str() const {
-    return "";
+    return "Map(" + std::to_string(getValue()) + ")";
 }
 
 void Map::play(Game& game, Player& player) {

@@ -16,7 +16,7 @@ Card::CardType Mermaid::type() const {
 }
 
 std::string Mermaid::str() const {
-    return "";
+    return "Mermaid(" + std::to_string(getValue()) + ")";
 }
 
 void Mermaid::play(Game& game, Player& player) {

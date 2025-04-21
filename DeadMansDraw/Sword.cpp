@@ -16,7 +16,7 @@ Card::CardType Sword::type() const {
 }
 
 std::string Sword::str() const {
-    return "";
+    return "Sword(" + std::to_string(getValue()) + ")";
 }
 
 void Sword::play(Game& game, Player& player) {

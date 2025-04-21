@@ -15,7 +15,7 @@ Card::CardType Cannon::type() const {
 }
 
 std::string Cannon::str() const {
-    return "";
+    return "Cannon(" + std::to_string(getValue()) + ")";
 }
 
 void Cannon::play(Game& game, Player& player) {

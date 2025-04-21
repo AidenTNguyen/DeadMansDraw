@@ -16,7 +16,7 @@ Card::CardType Kraken::type() const {
 }
 
 std::string Kraken::str() const {
-    return "";
+    return "Kraken(" + std::to_string(getValue()) + ")";
 }
 
 void Kraken::play(Game& game, Player& player) {

@@ -16,7 +16,7 @@ Card::CardType Anchor::type() const {
 }
 
 std::string Anchor::str() const {
-    return "";
+    return "Anchor(" + std::to_string(getValue()) + ")";
 }
 
 void Anchor::play(Game& game, Player& player) {

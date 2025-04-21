@@ -23,6 +23,13 @@ void Game::startGame() {
 
     while (round != 20 && !sharedDeck.empty()) {
 
+        int currentTurn = 1;
+        std::cout << "--- Round " << round << ", Turn " << currentTurn << " ---" << std::endl;
+        std::cout << activePlayer->getName() << "'s turn: " << std::endl;
+
+        activePlayer->displayBank();
+
+        round = 20;
     }
 
     // Do gameplay loop while playAgain = true
@@ -42,7 +49,7 @@ void Game::endGame() {
     for (const std::unique_ptr<Player>& player : playerList) {
 
         player->displayBank();
-        std::cout << "| Score: " << player->getScore() << std::endl;
+        std::cout << "| Score: " << player->calculateTotalScore() << std::endl;
 
         if (player->getScore() > highestScore) {
             victor = player->getName();
@@ -105,8 +112,12 @@ void Game::createDeck() {
         // Iterate through each card type
         for (int type = static_cast<int>(Card::CardType::Cannon); type <= static_cast<int>(Card::CardType::Anchor); ++type) {
 
-            sharedDeck.push_back(createCard(static_cast<Card::CardType>(type), value)); // Use the integer as an index of sorts fo the CardType enum list in Card.h
-
+            if (type == static_cast<int>(Card::CardType::Mermaid)) {
+                sharedDeck.push_back(createCard(static_cast<Card::CardType>(type), value + 2));
+            }
+            else {
+                sharedDeck.push_back(createCard(static_cast<Card::CardType>(type), value)); // Use the integer as an index of sorts fo the CardType enum list in Card.h
+            }
         }
     }
 }

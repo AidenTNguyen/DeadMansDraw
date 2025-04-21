@@ -16,7 +16,7 @@ Card::CardType Hook::type() const {
 }
 
 std::string Hook::str() const {
-    return "";
+    return "Hook(" + std::to_string(getValue()) + ")";
 }
 
 void Hook::play(Game& game, Player& player) {

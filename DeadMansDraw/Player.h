@@ -24,7 +24,7 @@ public:
     CardCollection& getPlayArea();
     CardCollection& getBank();
     void displayPlayArea() const;
-    void displayBank() const;
+    void displayBank();
     int calculateTotalScore();
     int getScore() const;
     std::string getName() const;

@@ -16,7 +16,7 @@ Card::CardType Key::type() const {
 }
 
 std::string Key::str() const {
-    return "";
+    return "Key(" + std::to_string(getValue()) + ")";
 }
 
 void Key::play(Game& game, Player& player) {

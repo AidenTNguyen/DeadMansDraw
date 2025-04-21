@@ -16,7 +16,7 @@ Card::CardType Chest::type() const {
 }
 
 std::string Chest::str() const {
-    return "";
+    return "Chest(" + std::to_string(getValue()) + ")";
 }
 
 void Chest::play(Game& game, Player& player) {

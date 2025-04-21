@@ -16,8 +16,6 @@ bool Player::isBust(std::unique_ptr<Card>& card) const {
             return true;
         }
         
-        return false;
-        
     }
 
     return false;
@@ -66,7 +64,7 @@ void Player::displayBank() const {
         }
 
         if (!selectedSuit.empty()) {
-            std::sort(selectedSuit.begin(), selectedSuit.end(), [](const std::unique_ptr<Card>& cardA, const std::unique_ptr<Card>& cardB) {
+            std::sort(selectedSuit.begin(), selectedSuit.end(), [](const Card* cardA, const Card* cardB) {
                 return cardA->getValue() > cardB->getValue(); // Handy little lambda function
                 });
 

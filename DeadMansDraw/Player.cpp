@@ -18,8 +18,6 @@ bool Player::isBust(std::unique_ptr<Card>& card) const {
 
     for (const std::unique_ptr<Card>& playAreaCard : playArea) {
 
-        if (!card || !playAreaCard) continue; // double check just to be safe
-
         if (card == playAreaCard) continue; // If its a duplicate which shouldnt happen skip over it
 
         if (card->type() == playAreaCard->type()) {
@@ -139,36 +137,28 @@ std::string Player::getName() const {
 * This function will be responsible for checking if the drawn card results in a bust
 */
 bool Player::playCard(std::unique_ptr<Card> card, Game& game) {
+
     std::cout << name << " draws a " << card->str() << std::endl;
 
-    // Check for bust before playing
-    if (isBust(card)) {
-        playArea.push_back(std::move(card));
+    if (isBust(card)) { // Does the card immediately cause a bust?
+        playArea.push_back(std::move(card)); // If so, chuck it in the play area for it to get discarded
         setBusted(true);
         return true;
     }
 
-    // Store the card type before moving it
-    Card::CardType cardType = card->type();
-
-    // Move the card to play area
     playArea.push_back(std::move(card));
+    std::unique_ptr<Card>& movedCard = playArea.back();
 
-    // Play the card's effect - this might modify the play area!
-    size_t cardIndex = playArea.size() - 1;
-    playArea[cardIndex]->play(game, *this);
+    movedCard->play(game, *this);
+    Card* rawPointer = movedCard.get();
 
-    for (size_t i = 0; i < playArea.size(); i++) {
-        for (size_t j = i + 1; j < playArea.size(); j++) {
-            if (playArea[i] && playArea[j] &&
-                playArea[i]->type() == playArea[j]->type()) {
-                setBusted(true);
-                return true;
-            }
-        }
+    if (isBust(movedCard, rawPointer)) {
+        setBusted(true);
+        return true;
     }
 
     return false;
+
 }
 
 void Player::setBusted(bool state) {

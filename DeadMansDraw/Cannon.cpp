@@ -56,6 +56,24 @@ void Cannon::play(Game& game, Player& player) {
         }
     }
 
+    // vector for the key pair values
+    std::vector<std::pair<Card::CardType, std::pair<int, size_t>>> choices;
+    for (const auto& pair : highestCards) {
+        choices.push_back(pair);
+    }
+
+    // display
+    std::cout << "  Select a card to discard from " << opponent->getName() << "'s Bank:" << std::endl;
+    for (int i = 0; i < choices.size(); ++i) {
+        size_t bankIndex = choices[i].second.second;
+        std::cout << "  (" << (i + 1) << ") " << opponentBank[bankIndex]->str() << std::endl;
+    }
+
+    int choice = 0;
+    std::cout << "  Which card do you want to discard? ";
+    std::cin >> choice;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the entire input buffer
+
 }
 
 void Cannon::willAddToBank(Game& game, const Player& player) {

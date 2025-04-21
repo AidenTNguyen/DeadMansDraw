@@ -24,7 +24,6 @@ void Anchor::play(Game& game, Player& player) {
     if (!played) {
         std::cout << "  Lucky days! Anchor has saved the cards drawn before it! :O <3" << std::endl;
     
-
         played = true;
 
         // Find all cards in the play area that come before this Anchor
@@ -33,31 +32,29 @@ void Anchor::play(Game& game, Player& player) {
 
         // find the anchor's current position in the play area
         size_t anchorIndex = 0;
-
         for (; anchorIndex < playArea.size(); anchorIndex++) {
             if (playArea[anchorIndex].get() == this) {
                 break;
             }
         }
-
-        // move cards to the bank (except this anchor)
-        for (size_t index = 0; index < anchorIndex; index++) {
-
-            // process from the front. like a banana.
-            if (playArea[0] && playArea[0].get() != this) {
-                std::cout << "    " << playArea[0]->str() << " moved to bank." << std::endl;
-                bank.push_back(std::move(playArea[0]));
-                playArea.erase(playArea.begin());
-
-                anchorIndex--; // since we removed an element
+        
+        // move all cards to the bank (except this anchor)
+        for (size_t i = 0; i < playArea.size();) {
+            // move to bank if not self
+            if (playArea[i].get() != this) {
+                std::cout << "    " << playArea[i]->str() << " moved to bank." << std::endl;
+                bank.push_back(std::move(playArea[i]));
+                playArea.erase(playArea.begin() + i);
+                // Don't increment i since we removed an element
+            } else {
+                // Skip this Anchor (Duh)
+                i++;
             }
         }
-
     }
     else {
         // already played
     }
-    
 }
 
 void Anchor::willAddToBank(Game& game, const Player& player) {

@@ -105,9 +105,9 @@ std::unique_ptr<Card> Game::drawCard() {
     }
 
     // Move the top card to a unique ptr
-    std::unique_ptr<Card> drawnCard = std::move(sharedDeck.back());
+    std::unique_ptr<Card> drawnCard = std::move(sharedDeck.front());
 
-    sharedDeck.pop_back();
+    sharedDeck.erase(sharedDeck.begin());
 
     return drawnCard;
 }

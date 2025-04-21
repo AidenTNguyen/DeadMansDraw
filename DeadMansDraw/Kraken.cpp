@@ -22,7 +22,7 @@ std::string Kraken::str() const {
 }
 
 void Kraken::play(Game& game, Player& player) {
-    std::cout << player.getName() << " draws a " << str() << std::endl;
+    std::cout << "  Draw 3 cards from the deck and play each:" << std::endl;
 
     int additionalDraws = 3;
     CardCollection& drawPile = game.getSharedDeck();

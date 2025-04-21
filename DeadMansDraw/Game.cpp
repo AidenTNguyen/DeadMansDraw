@@ -36,7 +36,7 @@ void Game::startGame() {
         do {
 
             auto drawnCard = drawCard();
-            activePlayer->playCard(drawnCard, *this);
+            activePlayer->playCard(std::move(drawnCard), *this);
 
             if (activePlayer->hasBusted()) {
                 discardHand(activePlayer);
@@ -105,9 +105,9 @@ std::unique_ptr<Card> Game::drawCard() {
     }
 
     // Move the top card to a unique ptr
-    std::unique_ptr<Card> drawnCard = std::move(sharedDeck.front());
+    std::unique_ptr<Card> drawnCard = std::move(sharedDeck.back());
 
-    sharedDeck.erase(sharedDeck.begin());
+    sharedDeck.pop_back();
 
     return drawnCard;
 }

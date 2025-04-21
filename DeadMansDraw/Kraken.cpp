@@ -25,12 +25,22 @@ void Kraken::play(Game& game, Player& player) {
     std::cout << player.getName() << " draws a " << str() << std::endl;
 
     int additionalDraws = 3;
+    CardCollection& drawPile = game.getSharedDeck();
 
     for (additionalDraws; additionalDraws != 0; additionalDraws--) {
 
-        if (game)
+        if (drawPile.empty()) {
+            std::cout << "Oh no were out of cards D:" << std::endl;
+            break;
+        }
 
         auto drawnCard = game.drawCard();
+
+        bool busted = player.playCard(std::move(drawnCard), game);
+
+        if (busted) {
+            return;
+        }
     }
 }
 

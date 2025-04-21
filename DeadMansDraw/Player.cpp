@@ -134,7 +134,7 @@ std::string Player::getName() const {
 /*
 * This function will be responsible for checking if the drawn card results in a bust
 */
-bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
+bool Player::playCard(std::unique_ptr<Card> card, Game& game) {
 
     std::cout << name << " draws a " << card->str() << std::endl;
 

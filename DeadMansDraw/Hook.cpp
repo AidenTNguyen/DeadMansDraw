@@ -22,6 +22,12 @@ std::string Hook::str() const {
 }
 
 void Hook::play(Game& game, Player& player) {
+
+    if (player.getBank().empty()) {
+        std::cout << " No cards in your Bank. Play continues." << std::endl;
+        return;
+    }
+
     std::cout << "  Select a highest-value card from any of the suits in your Bank:" << std::endl;
 
     std::map<Card::CardType, std::vector<std::unique_ptr<Card>>> suitGroups;
@@ -40,6 +46,26 @@ void Hook::play(Game& game, Player& player) {
         auto maxCardIterator = std::max_element(group.begin(), group.end(), [](const std::unique_ptr<Card>& cardA, const std::unique_ptr<Card>& cardB) {
             return cardA->getValue() < cardB->getValue();
             });
+
+        highestCards.push_back(std::move(*maxCardIterator));
+    }
+
+    for (int i = 0; i < highestCards.size(); ++i) {
+        std::cout << "(" << (i + 1) << ") " << highestCards[i]->str() << std::endl;
+    }
+
+    // choice time!
+    int choice = 0;
+    std::cout << " Which card do you pick? ";
+    std::cin >> choice;
+
+    // Might as well make sure its valid
+    if (choice >= 1 && choice <= highestCards.size()) {
+        auto chosenCard = std::move(highestCards[choice - 1]);
+        player.playCard(std::move(chosenCard), game);
+    }
+    else {
+        std::cout << "Invalid choice. Try again." << std::endl;
     }
 
 }

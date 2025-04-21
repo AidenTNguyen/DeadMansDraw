@@ -1,6 +1,7 @@
 #include "Sword.h"
 #include "Player.h"
 #include "Game.h"
+#include <map>
 
 using namespace std;
 
@@ -40,6 +41,40 @@ void Sword::play(Game& game, Player& player) {
         std::cout << "  No cards in other player's Bank. Play continues." << std::endl;
         return;
     }
+
+    // 'nother map!
+    std::map<Card::CardType, std::pair<int, size_t>> highestCards;
+
+    // Find the highest value
+    for (size_t i = 0; i < opponentBank.size(); i++) {
+        if (!opponentBank[i]) continue; // Skip null pointers
+
+        Card::CardType suit = opponentBank[i]->type();
+        int cardValue = opponentBank[i]->getValue();
+
+        if (highestCards.find(suit) == highestCards.end() ||
+            cardValue > highestCards[suit].first) {
+            highestCards[suit] = { cardValue, i };
+        }
+    }
+
+    std::vector<std::pair<Card::CardType, std::pair<int, size_t>>> choices;
+    for (const auto& pair : highestCards) {
+        choices.push_back(pair);
+    }
+
+    // Display
+    std::cout << "  Select a card to steal from " << opponent->getName() << "'s Bank:" << std::endl;
+    for (int i = 0; i < choices.size(); ++i) {
+        size_t bankIndex = choices[i].second.second;
+        std::cout << "  (" << (i + 1) << ") " << opponentBank[bankIndex]->str() << std::endl;
+    }
+
+    // choice
+    int choice = 0;
+    std::cout << "  Which card do you want to steal? ";
+    std::cin >> choice;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the entire input buffer
 }
 
 void Sword::willAddToBank(Game& game, const Player& player) {

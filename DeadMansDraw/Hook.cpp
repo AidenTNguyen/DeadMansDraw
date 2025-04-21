@@ -21,7 +21,22 @@ std::string Hook::str() const {
 }
 
 void Hook::play(Game& game, Player& player) {
-    std::cout << player.getName() << " draws a " << str() << std::endl;
+    std::cout << "  Select a highest-value card from any of the suits in your Bank:" << std::endl;
+
+    int index = 1;
+    for (const auto& card : player.getBank()) {
+        std::cout << "(" << index++ << ") " << card->str() << std::endl; // Print it out
+    }
+
+    int highestValue = -1;
+    int highestIndex = -1;
+
+    index = 0; // dont think it matters if we  reuse this
+
+    for (const auto& card : player.getBank()) {
+        int cardValue = card->getValue();
+        if (cardValue > highestValue)
+    }
 }
 
 void Hook::willAddToBank(Game& game, const Player& player) {

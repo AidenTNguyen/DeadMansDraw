@@ -167,6 +167,29 @@ std::string Player::getName() const {
 bool Player::playCard(std::unique_ptr<Card> card, Game& game) {
     std::cout << name << " draws a " << card->str() << std::endl;
 
+    // special treatment for my anchor cards
+    if (card->type() == Card::CardType::Anchor) {
+
+        playArea.push_back(std::move(card));
+
+        // get index
+        size_t cardIndex = playArea.size() - 1;
+        playArea[cardIndex]->play(game, *this);
+
+        // Check for bust after playing
+        for (size_t i = 0; i < playArea.size(); i++) {
+            for (size_t j = i + 1; j < playArea.size(); j++) {
+                if (playArea[i] && playArea[j] &&
+                    playArea[i]->type() == playArea[j]->type()) {
+                    setBusted(true);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     // Check for bust before playing
     if (isBust(card)) {
         playArea.push_back(std::move(card));
@@ -174,19 +197,17 @@ bool Player::playCard(std::unique_ptr<Card> card, Game& game) {
         return true;
     }
 
-    // Store the card type before moving it
+    // store before moving it
     Card::CardType cardType = card->type();
 
-    // Move the card to play area
+    // move to play area
     playArea.push_back(std::move(card));
 
-    // Play the card's effect - this might modify the play area!
+    // Play the card's effect
     size_t cardIndex = playArea.size() - 1;
     playArea[cardIndex]->play(game, *this);
 
-    // After playing, we need to check for bust
-    // But we can't use the previous reference as it might be invalid
-    // Instead, check all cards in play area against each other
+    // bust after playing the special effect?
 
     for (size_t i = 0; i < playArea.size(); i++) {
         for (size_t j = i + 1; j < playArea.size(); j++) {

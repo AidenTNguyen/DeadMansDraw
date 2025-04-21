@@ -21,7 +21,21 @@ std::string Anchor::str() const {
 }
 
 void Anchor::play(Game& game, Player& player) {
-    std::cout << player.getName() << " draws a " << str() << std::endl;
+    if (!played) {
+        std::cout << "  Lucky days! Anchor has saved the cards drawn before it! :O <3" << str() << std::endl;
+    
+
+        played = true;
+
+        // Find all cards in the play area that come before this Anchor
+        CardCollection& playArea = player.getPlayArea();
+        CardCollection& bank = player.getBank();
+
+    }
+    else {
+        // already played
+    }
+    
 }
 
 void Anchor::willAddToBank(Game& game, const Player& player) {

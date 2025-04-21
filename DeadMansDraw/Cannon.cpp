@@ -74,6 +74,25 @@ void Cannon::play(Game& game, Player& player) {
     std::cin >> choice;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the entire input buffer
 
+    if (choice >= 1 && choice <= choices.size()) {
+        // Get the index of the chosen card in the opponent's bank
+        size_t bankIndex = choices[choice - 1].second.second;
+
+        // Extract the card from the bank
+        std::unique_ptr<Card> discardedCard = std::move(opponentBank[bankIndex]);
+
+        // Show what's being discarded
+        std::cout << "  Discarding " << discardedCard->str() << " from " << opponent->getName() << "'s Bank." << std::endl;
+
+        // Add the card to the discard pile
+        game.getDiscardPile().push_back(std::move(discardedCard));
+
+        // Remove the null pointer from the bank
+        opponentBank.erase(opponentBank.begin() + bankIndex);
+    }
+    else {
+        std::cout << "  Invalid choice. No card discarded." << std::endl;
+    }
 }
 
 void Cannon::willAddToBank(Game& game, const Player& player) {

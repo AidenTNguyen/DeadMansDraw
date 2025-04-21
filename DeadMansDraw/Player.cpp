@@ -52,7 +52,16 @@ bool Player::isBust(std::unique_ptr<Card>& card) const {
 /*
     Moves the cards from the play area to the player's bank
 */
-void Player::bankCards() {
+void Player::bankCards(Game& game) {
+
+    // call willAddToBank on all cards in hand. Most should do nothing except chest!
+    for (std::unique_ptr<Card>& card : playArea) {
+        if (card) {
+            // Pass the game object and this player to the card
+            card->willAddToBank(game, *this);
+        }
+    }
+
     for (std::unique_ptr<Card>& card : playArea) {
         bank.push_back(std::move(card)); // Transferring ownership from Game -> Player
     }

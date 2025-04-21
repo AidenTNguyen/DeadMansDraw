@@ -20,7 +20,7 @@ public:
     ~Player() = default;
 
     bool isBust(std::unique_ptr<Card>& card) const;
-    void bankCards();
+    void bankCards(Game& game);
     CardCollection& getPlayArea();
     CardCollection& getBank();
     void displayPlayArea() const;

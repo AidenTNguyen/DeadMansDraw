@@ -56,7 +56,7 @@ void Game::startGame() {
                 playAgain = true;
             }
             else {
-                activePlayer->bankCards();
+                activePlayer->bankCards(*this);
                 activePlayer->displayBank();
                 playAgain = false;
                 currentTurn++;

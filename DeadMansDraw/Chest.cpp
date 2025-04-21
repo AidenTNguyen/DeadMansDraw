@@ -25,12 +25,15 @@ void Chest::play(Game& game, Player& player) {
     std::cout << "  No immediate effect. If banked with a key, draw as many bonus cards from the discard pile as you moved into your Bank." << std::endl;
 }
 
-void Chest::willAddToBank(Game& game, Player& player) {
+void Chest::willAddToBank(Game& game, const Player& player) {
+
+    Player& mutablePlayer = const_cast<Player&>(player);
     
     bool hasKey = false;
-    CardCollection& bank = player.getBank();
+    CardCollection& playArea = mutablePlayer.getPlayArea();
+    CardCollection& bank = mutablePlayer.getBank();
 
-    for (const auto& card : bank) {
+    for (const auto& card : playArea) {
         if (card && card->type() == Card::CardType::Key) {
             hasKey = true;
             break;
@@ -38,7 +41,7 @@ void Chest::willAddToBank(Game& game, Player& player) {
     }
 
     if (hasKey) {
-        const CardCollection& playArea = player.getPlayArea();
+        const CardCollection& playArea = mutablePlayer.getPlayArea();
         int cardsToAdd = playArea.size();
 
         CardCollection& discardPile = game.getDiscardPile();
@@ -64,7 +67,13 @@ void Chest::willAddToBank(Game& game, Player& player) {
                 drawnCardsStr += ", ";
             }
             drawnCardsStr += cardName;
+
+            bank.push_back(std::move(drawnCard));
         }
-    }
+
+        // Format the output as requested
+        std::cout << "  Chest and key activated. Added " << drawnCardsStr << " to your bank." << std::endl;
+        }
+    
 
 }

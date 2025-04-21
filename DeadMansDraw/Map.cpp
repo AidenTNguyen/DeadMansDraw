@@ -23,7 +23,6 @@ std::string Map::str() const {
 
 void Map::play(Game& game, Player& player) {
     std::cout << "  Draw 3 cards from the discard pile and pick one to add to the play area:" << std::endl;
-    std::cout << "  Draw 3 cards from the discard pile and pick one to add to the play area:" << std::endl;
 
     // Check if there are cards in the discard pile
     CardCollection& discardPile = game.getDiscardPile();

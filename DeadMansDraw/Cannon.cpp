@@ -22,7 +22,6 @@ std::string Cannon::str() const {
 }
 
 void Cannon::play(Game& game, Player& player) {
-    std::cout << player.getName() << " draws a " << str() << std::endl;
 
     // Find opponent
     Player* opponent = nullptr;

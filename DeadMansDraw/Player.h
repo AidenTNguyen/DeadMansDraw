@@ -30,11 +30,14 @@ public:
     std::string getName() const;
     bool playCard(std::unique_ptr<Card>& card, Game& game);
     bool addCardToPlayArea(std::unique_ptr<Card>& card, Game& game);
+    void setBusted(bool state);
+    bool hasBusted() const;
     
 protected:
 
     int score;
     std::string name;
+    bool busted = false;
 
 private:
 

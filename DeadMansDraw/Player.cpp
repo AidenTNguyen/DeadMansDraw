@@ -146,10 +146,20 @@ bool Player::addCardToPlayArea(std::unique_ptr<Card>& card, Game& game) {
 */
 bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
 
+    card->play(game, *this);
+
     if (isBust(card)) { // Does playing the card cause a bust?
         return true;
     }
 
     return false;
 
+}
+
+void Player::setBusted(bool state) {
+    busted = state;
+}
+
+bool Player::hasBusted() const {
+    return busted;
 }

@@ -1,4 +1,5 @@
 #include "Kraken.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ std::string Kraken::str() const {
 }
 
 void Kraken::play(Game& game, Player& player) {
-
+    std::cout << player.getName() << " draws a " << str() << std::endl;
 }
 
 void Kraken::willAddToBank(Game& game, const Player& player) {

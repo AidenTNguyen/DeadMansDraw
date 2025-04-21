@@ -50,6 +50,21 @@ void Chest::willAddToBank(Game& game, Player& player) {
             std::cout << " Chest and key activated, No cards in the discard pile" << std::endl;
             return;
         }
+
+        std::string drawnCardsStr = " ";
+
+        for (int index = 0; index < availableCards; ++index) {
+            
+            // get card from discord pile
+            std::unique_ptr<Card> drawnCard = std::move(discardPile.back());
+            std::string cardName = drawnCard->str();
+            discardPile.pop_back();
+
+            if (index > 0) {
+                drawnCardsStr += ", ";
+            }
+            drawnCardsStr += cardName;
+        }
     }
 
 }

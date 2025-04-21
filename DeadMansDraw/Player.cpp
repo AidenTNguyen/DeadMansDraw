@@ -61,7 +61,7 @@ void Player::displayPlayArea() const {
 */
 void Player::displayBank() {
 
-    std::cout << name << "'s Bank" << std::endl;
+    std::cout << name << "'s Bank:" << std::endl;
 
     for (int suit = static_cast<int>(Card::CardType::Cannon); suit <= static_cast<int>(Card::CardType::Anchor); suit++) { // Converts the enum list into integers to iterate through
         
@@ -81,8 +81,9 @@ void Player::displayBank() {
                 });
 
             for (const Card* card : selectedSuit) {
-                std::cout << card->str() << std::endl;
+                std::cout << "  " << card->str() << " ";
             }
+            std::cout << std::endl;
         }
 
     }

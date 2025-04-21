@@ -114,6 +114,8 @@ std::unique_ptr<Card> Game::drawCard() {
 
 void Game::endTurn() {
 
+    playerList[activePlayerIndex]->setBusted(false);
+
     if (activePlayerIndex == playerList.size() - 1) {
         activePlayerIndex = 0;
     }

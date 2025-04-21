@@ -91,8 +91,8 @@ void Game::createDeck() {
     }
 }
 
-//void Game::shuffleDeck(CardCollection& cards) {
-//    CardCollection shuffleDeck{ cards.begin(), cards.end() };
-//    std::shuffle(shuffleDeck.begin(), shuffleDeck.end(), std::mt19937{ std::random_device{}() });
-//    std::move(shuffleDeck.begin(), shuffleDeck.end(), cards.begin());
-//}
+void Game::shuffleDeck(CardCollection& cards) {
+    CardCollection shuffleDeck{ std::make_move_iterator(cards.begin()), std::make_move_iterator(cards.end()) };
+    std::shuffle(shuffleDeck.begin(), shuffleDeck.end(), std::mt19937{ std::random_device{}() });
+    std::move(shuffleDeck.begin(), shuffleDeck.end(), cards.begin());
+}

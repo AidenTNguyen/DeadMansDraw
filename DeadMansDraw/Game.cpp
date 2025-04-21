@@ -98,6 +98,10 @@ void Game::shuffleDeck(CardCollection& cards) {
     std::move(shuffleDeck.begin(), shuffleDeck.end(), cards.begin());
 }
 
+// If the game was more than 2 people this function would take an integer for no. players
 void Game::initialisePlayers() {
     activePlayerIndex = 0;
+
+    playerList.push_back(std::make_unique<Player>());
+    playerList.push_back(std::make_unique<Player>());
 }

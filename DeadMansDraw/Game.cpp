@@ -20,15 +20,15 @@ void Game::startGame() {
 
     std::cout << "Starting Dead Man's Draw++!" << std::endl;
 
-    int round = 0;
+    int round = 1;
+    int currentTurn = 1;
+    bool newRound = true;
     bool playAgain = false;
 
     while (round != 21 && !sharedDeck.empty()) {
 
         std::unique_ptr<Player>& activePlayer = playerList[activePlayerIndex];
 
-        round++;
-        int currentTurn = 1;
         std::cout << "--- Round " << round << ", Turn " << currentTurn << " ---" << std::endl;
         std::cout << activePlayer->getName() << "'s turn: " << std::endl;
         activePlayer->displayBank();
@@ -53,13 +53,20 @@ void Game::startGame() {
             std::getline(std::cin, reply);
 
             if (reply == "y") {
-                currentTurn ++;
                 playAgain = true;
             }
             else {
                 activePlayer->bankCards();
                 activePlayer->displayBank();
                 playAgain = false;
+                currentTurn++;
+
+                newRound = !newRound; // This method would not work for more than 2 players
+
+                if (newRound) {
+                    round++;
+                }
+
                 endTurn();
             }
 

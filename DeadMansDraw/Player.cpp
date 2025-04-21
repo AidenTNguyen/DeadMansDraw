@@ -19,7 +19,7 @@ bool Player::isBust(std::unique_ptr<Card>& card, const Card* excludeCard) const 
     for (const std::unique_ptr<Card>& playAreaCard : playArea) {
         if (playAreaCard.get() == excludeCard) continue; // If its a duplicate which shouldnt happen skip over it
         if (card->type() == playAreaCard->type()) {
-            std::cout << "Bust! " << playerList[activePlayerIndex]->getName() << " loses all cards in play area." << std::endl;
+            std::cout << "Bust! " << name << " loses all cards in play area." << std::endl;
             return true;
         }
         

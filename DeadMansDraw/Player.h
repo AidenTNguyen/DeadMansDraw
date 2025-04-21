@@ -29,7 +29,6 @@ public:
     int getScore() const;
     std::string getName() const;
     bool playCard(std::unique_ptr<Card>& card, Game& game);
-    bool addCardToPlayArea(std::unique_ptr<Card>& card, Game& game);
     void setBusted(bool state);
     bool hasBusted() const;
     

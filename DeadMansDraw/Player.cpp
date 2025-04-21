@@ -124,31 +124,23 @@ std::string Player::getName() const {
     return name;
 }
 
-bool Player::addCardToPlayArea(std::unique_ptr<Card>& card, Game& game) {
+bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
 
     std::cout << name << " draws a " << card->str() << std::endl;
 
     if (isBust(card)) { // Does the card immediately cause a bust?
         playArea.push_back(std::move(card)); // If so, chuck it in the play area for it to get discarded
+        setBusted(true);
         return true;
     }
 
     playArea.push_back(std::move(card));
     std::unique_ptr<Card>& movedCard = playArea.back();
 
-    playCard(movedCard, game); // Check for whether the play area busts after playing the card effect separate from the original card just above
+    movedCard->play(game, *this);
 
-}
-
-/*
-    First plays the card into the play area and then checks if doing so causes a bust
-    if not it plays the card and checks again if it causes a bust
-*/
-bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
-
-    card->play(game, *this);
-
-    if (isBust(card)) { // Does playing the card cause a bust?
+    if (isBust(movedCard)) {
+        setBusted(true);
         return true;
     }
 

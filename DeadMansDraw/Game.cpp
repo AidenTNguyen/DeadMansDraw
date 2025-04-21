@@ -37,31 +37,29 @@ void Game::startGame() {
             activePlayer->displayBank();
 
             auto drawnCard = drawCard();
+            activePlayer->playCard(drawnCard, *this);
 
-            if (activePlayer->playCard(drawnCard, *this) == true) { // Bust
+            if (activePlayer->hasBusted()) {
                 discardHand(activePlayer);
                 endTurn();
                 playAgain = false;
                 break;
             }
-            else {
-                activePlayer->displayPlayArea();
 
-                std::string reply;
-                std::cout << "Draw again ? (y/n): ";
-                std::getline(std::cin, reply);
+            activePlayer->displayPlayArea();
 
-                if (reply == "y") {
-                    currentTurn++;
-                    playAgain = true;
-                }
-                else {
-                    playAgain = false;
-                }
+            std::string reply;
+            std::cout << "Draw again ? (y/n): ";
+            std::getline(std::cin, reply);
+
+            if (reply == "y") {
+                currentTurn++;
+                playAgain = true;
             }
+            else {
+                playAgain = false;                       
 
         } while (playAgain);
-    }
 }
 
 void Game::endGame() {

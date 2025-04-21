@@ -125,7 +125,18 @@ void Game::endTurn() {
 
 }
 
+// Some cool dual action discarding going on here. The hip and pop new stuff for the anchor cards and the regular stuff for the muggles.
 void Game::discardHand(std::unique_ptr<Player>& player) {
+
+    bool anchorInPlay = false;
+    size_t anchorIndex = 0;
+
+    for (size_t index = 0; index < player->getPlayArea().size(); index++ {
+
+    }
+
+
+
 
     while (!player->getPlayArea().empty()) {
         discardPile.push_back(std::move(player->getPlayArea().back())); // Move ptrs to discard pile

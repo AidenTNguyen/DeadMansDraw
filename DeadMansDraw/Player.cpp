@@ -11,22 +11,41 @@ Player::Player() : score(0)
 *  Determines if the given card matches suit with any cards in the current play area
 */
 bool Player::isBust(std::unique_ptr<Card>& card) const {
+    // First, validate that card is not null
+    if (!card) {
+        return false;
+    }
 
     if (playArea.empty()) {
         return false;
     }
 
-    for (const std::unique_ptr<Card>& playAreaCard : playArea) {
-
-        if (card == playAreaCard) continue; // If its a duplicate which shouldnt happen skip over it
-
-        if (card->type() == playAreaCard->type()) {
-            std::cout << "Bust! " << name << " loses all cards in play area." << std::endl;
-            return true;
-        }
-        
+    // Get the card's type safely ONCE before any comparisons
+    Card::CardType currentCardType;
+    try {
+        currentCardType = card->type();
+    }
+    catch (...) {
+        return false; // If we can't get the type, assume it's not a bust
     }
 
+    // Now compare with play area cards
+    for (const std::unique_ptr<Card>& playAreaCard : playArea) {
+        if (!playAreaCard) continue;
+
+        // Skip if it's the same card object (pointer comparison)
+        if (card.get() == playAreaCard.get()) continue;
+
+        try {
+            if (currentCardType == playAreaCard->type()) {
+                std::cout << "Bust! " << name << " loses all cards in play area." << std::endl;
+                return true;
+            }
+        }
+        catch (...) {
+            continue; // Skip this comparison if it throws
+        }
+    }
     return false;
 }
 
@@ -155,6 +174,10 @@ bool Player::playCard(std::unique_ptr<Card> card, Game& game) {
     // Play the card's effect - this might modify the play area!
     size_t cardIndex = playArea.size() - 1;
     playArea[cardIndex]->play(game, *this);
+
+    // After playing, we need to check for bust
+    // But we can't use the previous reference as it might be invalid
+    // Instead, check all cards in play area against each other
 
     for (size_t i = 0; i < playArea.size(); i++) {
         for (size_t j = i + 1; j < playArea.size(); j++) {

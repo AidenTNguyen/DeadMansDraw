@@ -23,51 +23,62 @@ std::string Hook::str() const {
 
 void Hook::play(Game& game, Player& player) {
 
-    if (player.getBank().empty()) {
+    CardCollection& bank = player.getBank();
+
+    if (bank.empty()) {
         std::cout << " No cards in your Bank. Play continues." << std::endl;
         return;
     }
 
     std::cout << "  Select a highest-value card from any of the suits in your Bank:" << std::endl;
 
-    std::map<Card::CardType, std::vector<std::unique_ptr<Card>>> suitGroups;
+    std::map<Card::CardType, std::pair<int, size_t>> highestCards; // Maps suit to {value, index}
 
-    for (auto& card : player.getBank()) {
-        Card::CardType suit = card->type();
+    // Find the highest value card of each suit
+    for (size_t i = 0; i < bank.size(); i++) {
+        if (!bank[i]) continue; // Skip null pointers
 
-        // Create a group for the suit if it doesn't exist
-        suitGroups[suit].push_back(std::move(card));
+        Card::CardType suit = bank[i]->type();
+        int cardValue = bank[i]->getValue();
+
+        if (highestCards.find(suit) == highestCards.end() ||
+            cardValue > highestCards[suit].first) {
+            highestCards[suit] = { cardValue, i };
+        }
     }
 
-    std::vector<std::unique_ptr<Card>> highestCards;
-
-    for (auto& suitGroup : suitGroups) {
-        auto& group = suitGroup.second;
-        auto maxCardIterator = std::max_element(group.begin(), group.end(), [](const std::unique_ptr<Card>& cardA, const std::unique_ptr<Card>& cardB) {
-            return cardA->getValue() < cardB->getValue();
-            });
-
-        highestCards.push_back(std::move(*maxCardIterator));
+    // vector of the suits and their highest values for display
+    std::vector<std::pair<Card::CardType, std::pair<int, size_t>>> choices;
+    for (const auto& pair : highestCards) {
+        choices.push_back(pair);
     }
 
-    for (int i = 0; i < highestCards.size(); ++i) {
-        std::cout << "(" << (i + 1) << ") " << highestCards[i]->str() << std::endl;
+    for (int i = 0; i < choices.size(); ++i) {
+        size_t bankIndex = choices[i].second.second;
+        std::cout << "(" << (i + 1) << ") " << bank[bankIndex]->str() << std::endl;
     }
 
-    // choice time!
+    // Get player's choice
     int choice = 0;
     std::cout << " Which card do you pick? ";
     std::cin >> choice;
 
-    // Might as well make sure its valid
-    if (choice >= 1 && choice <= highestCards.size()) {
-        auto chosenCard = std::move(highestCards[choice - 1]);
+    if (choice >= 1 && choice <= choices.size()) {
+        // Get the index of the chosen card in the bank
+        size_t bankIndex = choices[choice - 1].second.second;
+
+        // extract the card from the bank
+        std::unique_ptr<Card> chosenCard = std::move(bank[bankIndex]);
+
+        // remove the null pointer from the bank
+        bank.erase(bank.begin() + bankIndex);
+
+        // play the chosen card
         player.playCard(std::move(chosenCard), game);
     }
     else {
         std::cout << "Invalid choice. Try again." << std::endl;
     }
-
 }
 
 void Hook::willAddToBank(Game& game, const Player& player) {

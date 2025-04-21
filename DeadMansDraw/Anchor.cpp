@@ -22,7 +22,7 @@ std::string Anchor::str() const {
 
 void Anchor::play(Game& game, Player& player) {
     if (!played) {
-        std::cout << "  Lucky days! Anchor has saved the cards drawn before it! :O <3" << str() << std::endl;
+        std::cout << "  Lucky days! Anchor has saved the cards drawn before it! :O <3" << std::endl;
     
 
         played = true;
@@ -40,6 +40,18 @@ void Anchor::play(Game& game, Player& player) {
             }
         }
 
+        // move cards to the bank (except this anchor)
+        for (size_t index = 0; index < anchorIndex; index++) {
+
+            // process from the front. like a banana.
+            if (playArea[0] && playArea[0].get() != this) {
+                std::cout << "    " << playArea[0]->str() << " moved to bank." << std::endl;
+                bank.push_back(std::move(playArea[0]));
+                playArea.erase(playArea.begin());
+
+                anchorIndex--; // since we removed an element
+            }
+        }
 
     }
     else {

@@ -29,6 +29,7 @@ public:
     int getScore() const;
     std::string getName() const;
     bool playCard(std::unique_ptr<Card>& card, Game& game);
+    bool addCardToPlayArea(std::unique_ptr<Card>& card, Game& game);
     
 protected:
 

@@ -11,6 +11,11 @@ Player::Player() : score(0)
 *  Determines if the given card matches suit with any cards in the current play area
 */
 bool Player::isBust(std::unique_ptr<Card>& card) const {
+
+    if (playArea.empty()) {
+        return false;
+    }
+
     for (const std::unique_ptr<Card>& playAreaCard : playArea) {
         if (card->type() == playAreaCard->type()) {
             return true;
@@ -41,7 +46,7 @@ CardCollection& Player::getBank() {
 
 void Player::displayPlayArea() const {
     for (const std::unique_ptr<Card>& card : playArea) {
-        std::cout << card->str() << std::endl;
+        std::cout << card->str() << std::endl << std::endl;
     }
 }
 
@@ -119,25 +124,29 @@ std::string Player::getName() const {
     return name;
 }
 
+bool Player::addCardToPlayArea(std::unique_ptr<Card>& card, Game& game) {
+
+    std::cout << name << " draws a " << card->str() << std::endl;
+
+    if (isBust(card)) { // Does the card immediately cause a bust?
+        playArea.push_back(std::move(card)); // If so, chuck it in the play area for it to get discarded
+        return true;
+    }
+
+    playArea.push_back(std::move(card));
+    std::unique_ptr<Card>& movedCard = playArea.back();
+
+    playCard(movedCard, game); // Check for whether the play area busts after playing the card effect separate from the original card just above
+
+}
+
 /*
     First plays the card into the play area and then checks if doing so causes a bust
     if not it plays the card and checks again if it causes a bust
 */
 bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
 
-    playArea.push_back(std::move(card)); // Play the card into the play area no matter what
-    std::unique_ptr<Card>& movedCard = playArea.back();
-
-    std::cout << name << " draws a" << card->str() << std::endl;
-
-    if (isBust(movedCard)) { // Does the card immediately cause a bust?
-        return true;
-    }
-
-    // Else play the card
-    movedCard->play(game, *this);
-
-    if (isBust(movedCard)) { // Does playing the card cause a bust?
+    if (isBust(card)) { // Does playing the card cause a bust?
         return true;
     }
 

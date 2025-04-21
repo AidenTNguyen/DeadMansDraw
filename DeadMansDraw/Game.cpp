@@ -21,10 +21,12 @@ void Game::startGame() {
     std::cout << "Starting Dead Man's Draw++!" << std::endl;
 
     std::unique_ptr<Player>& activePlayer = playerList[0];
-    int round = 1;
+    int round = 0;
     bool playAgain = false;
 
-    while (round != 20 && !sharedDeck.empty()) {
+    while (round != 21 && !sharedDeck.empty()) {
+
+        round++;
 
         do {
 
@@ -42,10 +44,23 @@ void Game::startGame() {
                 playAgain = false;
                 break;
             }
+            else {
+                activePlayer->displayPlayArea();
+
+                std::string reply;
+                std::cout << "Draw again ? (y/n): ";
+                std::getline(std::cin, reply);
+
+                if (reply == "y") {
+                    currentTurn++;
+                    playAgain = true;
+                }
+                else {
+                    playAgain = false;
+                }
+            }
 
         } while (playAgain);
-
-
     }
 }
 

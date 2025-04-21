@@ -5,7 +5,16 @@
 
 using namespace std;
 
+Game::Game() {
+
+}
+
 void Game::startGame() {
+
+    initialisePlayers();
+    createDeck();
+    shuffleDeck(sharedDeck);
+
     // Do gameplay loop while playAgain = true
 
     //do {

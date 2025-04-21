@@ -8,7 +8,7 @@
 int main()
 {
     std::cout << GAME_TITLE << std::endl;
-    //Game game;
-    //game.startGame();
+    Game game;
+    game.startGame();
     return 0;
 }

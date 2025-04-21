@@ -10,13 +10,14 @@ Player::Player() : score(0)
 /*
 *  Determines if the given card matches suit with any cards in the current play area
 */
-bool Player::isBust(std::unique_ptr<Card>& card) const {
+bool Player::isBust(std::unique_ptr<Card>& card, const Card* excludeCard = nullptr) const {
 
     if (playArea.empty()) {
         return false;
     }
 
     for (const std::unique_ptr<Card>& playAreaCard : playArea) {
+        if (playAreaCard.get() == excludeCard) continue; // If its a duplicate which shouldnt happen skip over it
         if (card->type() == playAreaCard->type()) {
             return true;
         }
@@ -138,8 +139,9 @@ bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
     std::unique_ptr<Card>& movedCard = playArea.back();
 
     movedCard->play(game, *this);
+    Card* rawPointer = movedCard.get();
 
-    if (isBust(movedCard)) {
+    if (isBust(movedCard, rawPointer)) {
         setBusted(true);
         return true;
     }

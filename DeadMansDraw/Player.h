@@ -19,7 +19,7 @@ public:
     Player();
     ~Player() = default;
 
-    bool isBust(std::unique_ptr<Card>& card) const;
+    bool isBust(std::unique_ptr<Card>& card, const Card* excludeCard = nullptr) const;
     void bankCards();
     CardCollection& getPlayArea();
     CardCollection& getBank();

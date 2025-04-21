@@ -57,9 +57,11 @@ void Game::startGame() {
                 playAgain = true;
             }
             else {
-                playAgain = false;                       
+                playAgain = false;
+            }
 
-        } while (playAgain);
+            } while (playAgain);
+        }
 }
 
 void Game::endGame() {

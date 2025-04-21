@@ -15,6 +15,16 @@ void Game::startGame() {
     createDeck();
     shuffleDeck(sharedDeck);
 
+    // Some local variables
+    std::unique_ptr<Player>& activePlayer = playerList[0];
+    int round = 1;
+
+    std::cout << "Starting Dead Man's Draw++!" << std::endl;
+
+    while (round != 20 && !sharedDeck.empty()) {
+
+    }
+
     // Do gameplay loop while playAgain = true
 
     //do {

@@ -62,6 +62,7 @@ void Hook::play(Game& game, Player& player) {
     int choice = 0;
     std::cout << " Which card do you pick? ";
     std::cin >> choice;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the entire input buffer
 
     if (choice >= 1 && choice <= choices.size()) {
         // Get the index of the chosen card in the bank

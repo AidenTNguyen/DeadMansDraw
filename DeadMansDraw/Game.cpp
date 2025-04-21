@@ -20,21 +20,20 @@ void Game::startGame() {
 
     std::cout << "Starting Dead Man's Draw++!" << std::endl;
 
-    std::unique_ptr<Player>& activePlayer = playerList[0];
     int round = 0;
     bool playAgain = false;
 
     while (round != 21 && !sharedDeck.empty()) {
 
+        std::unique_ptr<Player>& activePlayer = playerList[activePlayerIndex];
+
         round++;
+        int currentTurn = 1;
+        std::cout << "--- Round " << round << ", Turn " << currentTurn << " ---" << std::endl;
+        std::cout << activePlayer->getName() << "'s turn: " << std::endl;
+        activePlayer->displayBank();
 
         do {
-
-            int currentTurn = 1;
-            std::cout << "--- Round " << round << ", Turn " << currentTurn << " ---" << std::endl;
-            std::cout << activePlayer->getName() << "'s turn: " << std::endl;
-
-            activePlayer->displayBank();
 
             auto drawnCard = drawCard();
             activePlayer->playCard(drawnCard, *this);
@@ -58,11 +57,16 @@ void Game::startGame() {
                 playAgain = true;
             }
             else {
+                activePlayer->bankCards();
+                activePlayer->displayBank();
                 playAgain = false;
+                endTurn();
             }
 
             } while (playAgain);
         }
+
+    endGame();
 }
 
 void Game::endGame() {
@@ -102,8 +106,6 @@ std::unique_ptr<Card> Game::drawCard() {
 }
 
 void Game::endTurn() {
-
-    std::cout << "Bust! " << playerList[activePlayerIndex]->getName() << " loses all cards in play area." << std::endl;
 
     if (activePlayerIndex == playerList.size() - 1) {
         activePlayerIndex = 0;

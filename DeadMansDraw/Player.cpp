@@ -19,6 +19,7 @@ bool Player::isBust(std::unique_ptr<Card>& card, const Card* excludeCard) const 
     for (const std::unique_ptr<Card>& playAreaCard : playArea) {
         if (playAreaCard.get() == excludeCard) continue; // If its a duplicate which shouldnt happen skip over it
         if (card->type() == playAreaCard->type()) {
+            std::cout << "Bust! " << playerList[activePlayerIndex]->getName() << " loses all cards in play area." << std::endl;
             return true;
         }
         
@@ -61,7 +62,6 @@ void Player::displayPlayArea() const {
 void Player::displayBank() {
 
     std::cout << name << "'s Bank" << std::endl;
-    std::cout << "| Score: " << calculateTotalScore() << std::endl;
 
     for (int suit = static_cast<int>(Card::CardType::Cannon); suit <= static_cast<int>(Card::CardType::Anchor); suit++) { // Converts the enum list into integers to iterate through
         
@@ -86,6 +86,8 @@ void Player::displayBank() {
         }
 
     }
+
+    std::cout << "| Score: " << calculateTotalScore() << std::endl;
 }
 
 /*

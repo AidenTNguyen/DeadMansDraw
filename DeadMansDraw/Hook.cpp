@@ -1,5 +1,6 @@
 #include "Hook.h"
 #include "Player.h"
+#include <map>
 
 using namespace std;
 
@@ -25,7 +26,13 @@ void Hook::play(Game& game, Player& player) {
 
     std::vector<std::unique_ptr<Card>> highestCards;
 
-    }
+    for (auto& card : player.getBank()) {
+        Card::CardType suit = card->type();
+
+        // new group for each suit
+        if 
+
+        }
 
 }
 

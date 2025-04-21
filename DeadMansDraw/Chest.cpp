@@ -1,5 +1,6 @@
 #include "Chest.h"
 #include "Player.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -33,6 +34,21 @@ void Chest::willAddToBank(Game& game, Player& player) {
         if (card && card->type() == Card::CardType::Key) {
             hasKey = true;
             break;
+        }
+    }
+
+    if (hasKey) {
+        const CardCollection& playArea = player.getPlayArea();
+        int cardsToAdd = playArea.size();
+
+        CardCollection& discardPile = game.getDiscardPile();
+
+        // are there enough cards in the discard pile
+        int availableCards = std::min(cardsToAdd, static_cast<int>(discardPile.size()));
+
+        if (availableCards == 0) {
+            std::cout << " Chest and key activated, No cards in the discard pile" << std::endl;
+            return;
         }
     }
 

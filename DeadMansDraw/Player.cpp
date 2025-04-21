@@ -128,6 +128,8 @@ bool Player::playCard(std::unique_ptr<Card>& card, Game& game) {
     playArea.push_back(std::move(card)); // Play the card into the play area no matter what
     std::unique_ptr<Card>& movedCard = playArea.back();
 
+    std::cout << name << " draws a" << card->str() << std::endl;
+
     if (isBust(movedCard)) { // Does the card immediately cause a bust?
         return true;
     }

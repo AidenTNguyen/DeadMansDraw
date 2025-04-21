@@ -23,7 +23,7 @@ public:
     void endGame();
     std::unique_ptr<Card> drawCard();
     void endTurn();
-    void discardHand(Player& player);
+    void discardHand(std::unique_ptr<Player>& player);
 
 private:
 

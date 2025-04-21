@@ -16,27 +16,37 @@ void Game::startGame() {
     shuffleDeck(sharedDeck);
 
     // Some local variables
-    std::unique_ptr<Player>& activePlayer = playerList[0];
-    int round = 1;
+
 
     std::cout << "Starting Dead Man's Draw++!" << std::endl;
 
+    std::unique_ptr<Player>& activePlayer = playerList[0];
+    int round = 1;
+    bool playAgain = false;
+
     while (round != 20 && !sharedDeck.empty()) {
 
-        int currentTurn = 1;
-        std::cout << "--- Round " << round << ", Turn " << currentTurn << " ---" << std::endl;
-        std::cout << activePlayer->getName() << "'s turn: " << std::endl;
+        do {
 
-        activePlayer->displayBank();
+            int currentTurn = 1;
+            std::cout << "--- Round " << round << ", Turn " << currentTurn << " ---" << std::endl;
+            std::cout << activePlayer->getName() << "'s turn: " << std::endl;
 
-        round = 20;
+            activePlayer->displayBank();
+
+            auto drawnCard = drawCard();
+
+            if (activePlayer->playCard(drawnCard, *this) == true) { // Bust
+                discardHand(activePlayer);
+                endTurn();
+                playAgain = false;
+                break;
+            }
+
+        } while (playAgain);
+
+
     }
-
-    // Do gameplay loop while playAgain = true
-
-    //do {
-
-    //} while (playAgain);
 }
 
 void Game::endGame() {
@@ -88,11 +98,11 @@ void Game::endTurn() {
 
 }
 
-void Game::discardHand(Player& player) {
+void Game::discardHand(std::unique_ptr<Player>& player) {
 
-    while (!player.getPlayArea().empty()) {
-        discardPile.push_back(std::move(player.getPlayArea().back())); // Move ptrs to discard pile
-        player.getPlayArea().pop_back(); // Clean up the remnant unique ptrs in the play area
+    while (!player->getPlayArea().empty()) {
+        discardPile.push_back(std::move(player->getPlayArea().back())); // Move ptrs to discard pile
+        player->getPlayArea().pop_back(); // Clean up the remnant unique ptrs in the play area
     }
 
 }

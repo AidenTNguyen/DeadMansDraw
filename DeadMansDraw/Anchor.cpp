@@ -31,6 +31,16 @@ void Anchor::play(Game& game, Player& player) {
         CardCollection& playArea = player.getPlayArea();
         CardCollection& bank = player.getBank();
 
+        // find the anchor's current position in the play area
+        size_t anchorIndex = 0;
+
+        for (; anchorIndex < playArea.size(); anchorIndex++) {
+            if (playArea[anchorIndex].get() == this) {
+                break;
+            }
+        }
+
+
     }
     else {
         // already played

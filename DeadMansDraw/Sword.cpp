@@ -1,5 +1,6 @@
 #include "Sword.h"
 #include "Player.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -24,11 +25,21 @@ void Sword::play(Game& game, Player& player) {
     std::cout << "  Steal the top card of any suit from the other player's Bank into your play area" << std::endl;
 
     // Find the opponent
+    Player* opponent = nullptr;
+    auto& playerList = game.getPlayerList();
+    for (auto& p : playerList) {
+        if (p && p->getName() != player.getName()) {
+            opponent = p.get();
+            break;
+        }
+    }
 
-    //if (opponentBank.empty()) {
-    //    std::cout << "  No cards in other player's Bank. Play continues." << std::endl;
-    //    return;
-    //}
+    CardCollection& opponentBank = opponent->getBank();
+
+    if (opponentBank.empty()) {
+        std::cout << "  No cards in other player's Bank. Play continues." << std::endl;
+        return;
+    }
 }
 
 void Sword::willAddToBank(Game& game, const Player& player) {
